@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -113,6 +114,13 @@ public final class Gson {
 
   private static final TypeToken<?> NULL_KEY_SURROGATE = TypeToken.get(Object.class);
   private static final String JSON_NON_EXECUTABLE_PREFIX = ")]}'\n";
+
+  public static final List<TypeAdapterFactory> GLOBAL_ADAPTER_FACTORIES = new ArrayList<TypeAdapterFactory>();
+  public static final Map<Type, TypeAdapter<?>> GLOBAL_TYPE_ADAPTERS = new HashMap<Type, TypeAdapter<?>>();
+
+  static {
+    GLOBAL_TYPE_ADAPTERS.put(Instant.class, Iso8601InstantTypeAdapter.INSTANCE);
+  }
 
   /**
    * This thread local guards against reentrant calls to getAdapter(). In
@@ -228,6 +236,11 @@ public final class Gson {
     factories.add(excluder);
 
     // users' type adapters
+    factories.addAll(GLOBAL_ADAPTER_FACTORIES);
+    for (Map.Entry<Type, TypeAdapter<?>> adapterEntry : GLOBAL_TYPE_ADAPTERS.entrySet()) {
+      // copy paste from com.google.gson.GsonBuilder.registerTypeAdapter
+      factories.add(TypeAdapters.newFactory(TypeToken.get(adapterEntry.getKey()), (TypeAdapter) adapterEntry.getValue()));
+    }
     factories.addAll(factoriesToBeAdded);
 
     // type adapters for basic platform types
