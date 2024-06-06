@@ -17,7 +17,6 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.internal.ConstructorConstructor;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import java.awt.Point;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -36,6 +35,16 @@ public class ReflectionAccessFilterTest {
 
     @Override
     public void close() throws IOException {
+    }
+  }
+
+  private static class Point {
+    private int x;
+    private int y;
+
+    public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
     }
   }
 
