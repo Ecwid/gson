@@ -27,7 +27,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javaVersion>8</javaVersion>
+    <javaVersion>11</javaVersion>
   </properties>
 
   <scm>
