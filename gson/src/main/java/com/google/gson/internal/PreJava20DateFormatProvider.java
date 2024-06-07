@@ -15,4 +15,13 @@ public class PreJava20DateFormatProvider {
     public static DateFormat getUSDateFormat() {
         return new SimpleDateFormat("MMM d, y, h:mm:ss a", Locale.US);
     }
+
+    /**
+     * Compatibility fix for old Javas runtime, if date was written by JDK 20 or greater
+     * @return Returns the same DateFormat as {@code DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.US)}
+     *  in Java 20 or upper.
+     */
+    public static DateFormat getNewUSDateFormat() {
+        return new SimpleDateFormat("MMM d, y, h:mm:ss a", Locale.US);
+    }
 }
