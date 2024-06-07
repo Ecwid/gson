@@ -18,6 +18,8 @@ public class PreJava20DateFormatProvider {
 
     /**
      * Compatibility fix for old Javas runtime, if date was written by JDK 20 or greater
+     * This date format contains NBSP symbol instead space before AM/PM
+     *
      * @return Returns the same DateFormat as {@code DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.US)}
      *  in Java 20 or upper.
      */
