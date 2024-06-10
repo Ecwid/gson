@@ -68,6 +68,8 @@ public final class DateTypeAdapter extends TypeAdapter<Date> {
     }
     if (JavaVersion.isJava20OrLater()) {
       dateFormats.add(PreJava20DateFormatProvider.getUSDateFormat());
+    } else {
+      dateFormats.add(PreJava20DateFormatProvider.getNewUSDateFormat());
     }
   }
 
